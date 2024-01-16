@@ -27,6 +27,7 @@ CREATE TABLE tbl_student (
 	학년 VARCHAR(1), -- 문자열
 	전화번호 VARCHAR(15), -- 문자열
 	주소 VARCHAR(125) -- 문자열
+    -- 학생정보 (학번 ~ 주소) = Entity
 );
 SHOW TABLES;
 

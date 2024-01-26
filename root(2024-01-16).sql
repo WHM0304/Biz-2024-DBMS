@@ -179,6 +179,7 @@ UPDATE tbl_professor
 SET prof_tel = '090-2084-2933'
 WHERE prof_num = 'P001';
 
-
+SELECT *
+FROM tbl_professor;
 
 

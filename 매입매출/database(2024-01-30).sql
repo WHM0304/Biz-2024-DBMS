@@ -238,7 +238,13 @@ WHERE io_div = '1'
 GROUP BY io_div;
 
 
-
+CREATE TABLE tbl_members(
+m_username	VARCHAR(15)		PRIMARY KEY,
+m_password	VARCHAR(125)	NOT NULL	,
+m_realname	VARCHAR(20)		,
+m_tel	VARCHAR(15)		,
+m_role	VARCHAR(5)		
+);
 
 
 

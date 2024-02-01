@@ -28,7 +28,7 @@ SELECT * FROM tbl_members;
 TRUNCATE tbl_members;
 DESC tbl_members;
 /*
-기존의 Table 구조 변경하기view_iolistview_iolist
+기존의 Table 구조 변경하기
 칼럼의 이름을 변경하거나 , 칼럼의 type 을 변경하는 일
 FK 를 새로 설정하거나 , PK 도 새로 설정 또는 변경하는 일
 ALTER TABLE ... 명령을 사용하여 변경한다

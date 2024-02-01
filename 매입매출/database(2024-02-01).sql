@@ -1,7 +1,7 @@
 -- 매입매출
 DROP DATABASE edb;
 CREATE DATABASE edb;
-USE edb;
+USE ecountdb;
 SHOW TABLES;
 SELECT * FROM tbl_members;
 
@@ -28,7 +28,7 @@ SELECT * FROM tbl_members;
 TRUNCATE tbl_members;
 DESC tbl_members;
 /*
-기존의 Table 구조 변경하기
+기존의 Table 구조 변경하기view_iolistview_iolist
 칼럼의 이름을 변경하거나 , 칼럼의 type 을 변경하는 일
 FK 를 새로 설정하거나 , PK 도 새로 설정 또는 변경하는 일
 ALTER TABLE ... 명령을 사용하여 변경한다
@@ -43,5 +43,43 @@ ALTER TABLE ... 명령을 사용하여 변경한다
     
 2. 칼럼의 이름 변경 : 연관된 여러 애플리케이션에서 해당 칼럼을 찾지 못하는
 	문제가 발생한다.
+    
+3. 제약조건 : FK , PK 등의 제약조건의 변경
+	데이터의 무결성 보장이 해제되는 문제를 일으킨다.
 */
+
+-- 칼럼의 이름과 type 변경
+-- 1. m_pass VARCHAR(50) 이라는 칼럼 생성
+-- 2. m_password 칼럼에 저장된 데이터를 m_pass 로 이동 또는 복사
+-- 3. m_password 칼럼을 삭제
+ALTER TABLE tbl_members
+CHANGE m_password m_pass VARCHAR(50);
+DESC tbl_members;
+
+ALTER TABLE tbl_members
+CHANGE m_pass m_password VARCHAR(125);
+
+-- 칼럼의 Type 만 변경할때
+ALTER TABLE tbl_members
+MODIFY m_password VARCHAR(255);
+
+-- 칼럼의 이름만 변경하고 싶을때
+ALTER TABLE tbl_members
+CHANGE m_passowrd m_pass VARCHAR(50);
+
+-- FK 생성
+ALTER TABLE tbl_iolist
+ADD CONSTRAINT FK_PCODE
+FOREIGN KEY (io_pcode)
+REFERENCES tbl_products(p_code);
+
+-- FK 삭제
+ALTER TABLE tbl_iolist
+DROP CONSTRAINT FK_PCODE;
+
+DESC tbl_members;
+SELECT * FROM tbl_iolist;
+USE ecountDB;
+SELECT* FROM tbl_products;
+
 

@@ -161,7 +161,7 @@ ORDER BY io_pcode;
 -- SELECTION 을 하여 조건 조회
 SELECT *
 FROM view_iolist
-WHERE io_date BETWEEN '2023-02-01' AND '2023-02-29'
+WHERE io_date BETWEEN '2023-02-01' AND '2023-02-29';
 
 SELECT io_date, io_pcode, p_name 
 FROM view_iolist;

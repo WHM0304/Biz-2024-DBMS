@@ -49,4 +49,48 @@ ALTER SESSION SET "_ORACLE_SCRIPT" = true;
 CREATE USER user1 IDENTIFIED BY 12341234
 DEFAULT TABLESPACE myDB;
 
+/* 
+사용자 생성후 권한 부여
+새로운 사용자를 생성하면 아무런 권한이 없다.
+심지어 로그인을 할수 있는 권한도 없는 상태이다.
+사용자에게 부여하는 권하는 표준화(조직내에서) 된 정책을 수립하고
+그 정책에 따라 세부적으로 권한을 부여하는 것이 좋다
+*/
+
+-- 로그인을 할수 있는 권한 부여
+GRANT CREATE SESSION TO user1;
+
+-- 로그인 권한을 회수
+REVOKE CREATE SESSION FROM user1;
+
+-- 관리자(sys) 권한으로 user1 SCHEMA 에 임시 테이블 생성
+-- VARCHAR : 알파벳문자, nVARCHAR : 한글같은문자
+CREATE TABLE user1.tbl_user (
+    seq NUMBER,
+    username VARCHAR2(125),
+    nickname nVARCHAR2(125)
+)
+
+-- user1 에게 tbl_user 테이블의 CRUD 를 구현할수 있는 권한 부여하기
+GRANT SELECT ON user1.tbl_user TO user1;
+GRANT UPDATE ON user1.tbl_user TO user1;
+GRANT INSERT ON user1.tbl_user TO user1;
+GRANT DELETE ON user1.tbl_user TO user1;
+
+-- user1 에 새로운 테이블을 생성, 삭제, 변경하는 권한을 부여하기
+GRANT CREATE ANY TABLE TO user1;
+GRANT DROP ANY TABLE TO user1;
+GRANT ALTER ANY TABLE TO user1;
+
+-- 원칙은 세부적으로 권한을 부여해야 하지만
+-- 학습적 목적에서 세부적인 권한을 일일이 부여하는 것은 불편한 상황이다
+-- 오라클 DB 학습에서는 DBA 라는 권한을 새로 생성한 사용자에게 부여한다.
+-- 오라클에서 DBA 는 SYSDBA 보다 다소 등급이 낮은 권한이다.
+-- 하지만 DBA 권한을 부여하면 DDL, DML, DCL 모든 명령을 수행할수 있다.
+-- 실무에서는 DBA 권한을 함부로 부여하면 안된다.
+GRANT DBA TO user1;
+
+
+
+
 

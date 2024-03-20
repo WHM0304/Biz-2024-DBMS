@@ -163,15 +163,17 @@ HAVING 절을 통하여 조건을 주어 원하는 결과를 찾는 것보다
 		JOIN tbl_score SC
 			ON ST.st_num = SC.s_stnum
 	WHERE ST.st_num IN (
-				SELECT st_num 
+				SELECT s_stnum 
                 FROM tbl_score BS
 				WHERE BS.s_subject = '국어' 
-					AND BS.s_score >= 60
+					AND BS.s_score >= '60'
 					)
     GROUP BY ST.st_num , ST.st_name;
 
-SELECT * FROM tbl_student
-WHERE st_num IN ('S0001', 'S0002','S0005','S0019');
+SELECT s_stnum 
+		FROM tbl_score 
+		WHERE s_subject = '국어' 
+		AND s_score >= '60';
 
  
 -- 전체학생의 국어점수 총점과 평균을 계산하시오

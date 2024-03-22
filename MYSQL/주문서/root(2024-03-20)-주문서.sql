@@ -72,3 +72,7 @@ REFERENCES tbl_product(p_code);
 
 TRUNCATE TABLE tbl_rel_order;
 SELECT * FROM tbl_rel_order;
+
+-- outer join FK 무결성확인
+SELECT * FROM tbl_rel_order A LEFT JOIN tbl_product B
+ON A.r_pcode = B.p_code;
